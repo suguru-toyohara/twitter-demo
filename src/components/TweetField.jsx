@@ -19,6 +19,7 @@ export const TweetField = ({ inputFunc }) => {
               onChange={(e) => {
                 SetTweet(e.target.value);
               }}
+              value={Tweet}
             />
             <Grid container>
               <Grid item xs={7} />
@@ -36,6 +37,7 @@ export const TweetField = ({ inputFunc }) => {
                       userId: '@Simeji1993',
                       tweet: Tweet,
                     });
+                    SetTweet('');
                   }}
                 >
                   ポストする
