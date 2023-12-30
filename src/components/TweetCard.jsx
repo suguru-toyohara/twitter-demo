@@ -14,7 +14,7 @@ export const TweetCard = ({ user, userId, tweet }) => {
               <span style={{ fontWeight: 'bold' }}>{user}</span>
               <span style={{ color: 'gray' }}>{userId}</span>
             </Box>
-            <Typography>{tweet}</Typography>
+            <Typography sx={{ whiteSpace: 'pre-wrap' }}>{tweet}</Typography>
           </Stack>
         </Grid>
       </Grid>
