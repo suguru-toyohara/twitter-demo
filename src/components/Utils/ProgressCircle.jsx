@@ -12,7 +12,7 @@ export const ProgressCircle = (props) => {
             />
             <CircularProgress
                 variant="determinate"
-                value={22}
+                value={props.value}
                 size={props.size}
                 className="items"
             />
