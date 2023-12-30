@@ -1,10 +1,12 @@
-import { Stack, Grid, Avatar, InputBase, Button } from '@mui/material';
+import { Stack, Grid, Avatar, InputBase, Button, CircularProgress } from '@mui/material';
 import { ProgressCircle } from './Utils/ProgressCircle';
 import { useState } from 'react';
 import PropTypes from 'prop-types'; // Add this line
+import { Sleep } from './Utils/Utils';
 
 export const TweetField = ({ inputFunc }) => {
   const [Tweet, SetTweet] = useState('');
+  const [isTweeting, SetIsTweeting] = useState(false);
   return (
     <>
       <Grid container sx={{ padding: '10px' }}>
@@ -24,7 +26,11 @@ export const TweetField = ({ inputFunc }) => {
             <Grid container>
               <Grid item xs={7} />
               <Grid item xs={2} sx={{ marginTop: '4px', position: 'relative' }}>
-                {<ProgressCircle value={Math.floor((Tweet.length / 140) * 100)} size={'30px'} />}
+                {isTweeting ? (
+                  <CircularProgress size={'30px'} />
+                ) : (
+                  <ProgressCircle value={Math.floor((Tweet.length / 140) * 100)} size={'30px'} />
+                )}
               </Grid>
               <Grid item xs={3}>
                 <Button
@@ -32,12 +38,17 @@ export const TweetField = ({ inputFunc }) => {
                   variant="contained"
                   disabled={Tweet === ''}
                   onClick={() => {
-                    inputFunc({
-                      user: 'Simeji',
-                      userId: '@Simeji1993',
-                      tweet: Tweet,
+                    const promise = Sleep(1000);
+                    SetIsTweeting(true);
+                    promise.then(() => {
+                      inputFunc({
+                        user: 'Simeji',
+                        userId: '@Simeji1993',
+                        tweet: Tweet,
+                      });
+                      SetTweet('');
+                      SetIsTweeting(false);
                     });
-                    SetTweet('');
                   }}
                 >
                   ポストする

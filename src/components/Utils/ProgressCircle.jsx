@@ -2,7 +2,7 @@ import { CircularProgress } from '@mui/material';
 import './main.css';
 import PropTypes from 'prop-types';
 
-export const ProgressCircle = ({size, value}) => {
+export const ProgressCircle = ({ size, value }) => {
   return (
     <>
       <CircularProgress
@@ -12,12 +12,7 @@ export const ProgressCircle = ({size, value}) => {
         size={size}
         className="items"
       />
-      <CircularProgress
-        variant="determinate"
-        value={value}
-        size={size}
-        className="items"
-      />
+      <CircularProgress variant="determinate" value={value} size={size} className="items" />
     </>
   );
 };
