@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export const ProgressCircle = ({ size, value }) => {
   return (
-    <Box sx={{ position: "relative"}}>
+    <Box sx={{ position: 'relative' }}>
       <CircularProgress
         variant="determinate"
         sx={{ color: '#CCC', position: 'absolute' }}

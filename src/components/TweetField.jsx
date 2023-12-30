@@ -10,7 +10,6 @@ const AbsolutePositionDiv = styled.div`
   left: 30%;
 `;
 
-
 export const TweetField = ({ inputFunc }) => {
   const [Tweet, SetTweet] = useState('');
   const [isTweeting, SetIsTweeting] = useState(false);
@@ -36,11 +35,11 @@ export const TweetField = ({ inputFunc }) => {
               <Grid item xs={7} />
               <Grid item xs={2} sx={{ marginTop: '4px', position: 'relative' }}>
                 <AbsolutePositionDiv>
-                {isTweeting ? (
-                  <CircularProgress size={'30px'} />
-                ) : (
-                  <ProgressCircle value={Math.floor((Tweet.length / 140) * 100)} size={'30px'} />
-                )}
+                  {isTweeting ? (
+                    <CircularProgress size={'30px'} />
+                  ) : (
+                    <ProgressCircle value={Math.floor((Tweet.length / 140) * 100)} size={'30px'} />
+                  )}
                 </AbsolutePositionDiv>
               </Grid>
               <Grid item xs={3}>
