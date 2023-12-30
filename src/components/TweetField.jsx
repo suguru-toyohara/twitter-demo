@@ -22,6 +22,7 @@ export const TweetField = ({ inputFunc }) => {
                 SetTweet(e.target.value);
               }}
               value={Tweet}
+              disabled={isTweeting}
             />
             <Grid container>
               <Grid item xs={7} />
