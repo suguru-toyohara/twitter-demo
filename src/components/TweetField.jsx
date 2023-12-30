@@ -1,7 +1,9 @@
 import { Stack, Grid, Avatar, InputBase, Button } from '@mui/material';
 import { ProgressCircle } from './Utils/ProgressCircle';
 import { useState } from 'react';
-export const TweetField = (props) => {
+import PropTypes from 'prop-types'; // Add this line
+
+export const TweetField = ({ inputFunc }) => {
   const [Tweet, SetTweet] = useState('');
   return (
     <>
@@ -20,16 +22,16 @@ export const TweetField = (props) => {
             />
             <Grid container>
               <Grid item xs={7} />
-              <Grid item xs={2} sx={{marginTop: "4px", position: "relative"}}>
-                {<ProgressCircle value={Math.floor(Tweet.length / 140 * 100)} size={"30px"}/>}
+              <Grid item xs={2} sx={{ marginTop: '4px', position: 'relative' }}>
+                {<ProgressCircle value={Math.floor((Tweet.length / 140) * 100)} size={'30px'} />}
               </Grid>
               <Grid item xs={3}>
                 <Button
-                  sx={{ borderRadius: '20px'}}
+                  sx={{ borderRadius: '20px' }}
                   variant="contained"
-                  disabled={Tweet === ""}
+                  disabled={Tweet === ''}
                   onClick={() => {
-                    props.inputFunc({
+                    inputFunc({
                       user: 'Simeji',
                       userId: '@Simeji1993',
                       tweet: Tweet,
@@ -45,4 +47,9 @@ export const TweetField = (props) => {
       </Grid>
     </>
   );
+};
+
+// Add this block
+TweetField.propTypes = {
+  inputFunc: PropTypes.func.isRequired,
 };

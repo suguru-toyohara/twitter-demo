@@ -1,0 +1,6 @@
+# BEGIN: .eslintignore standard configuration
+node_modules/
+dist/
+build/
+coverage/
+# END: .eslintignore standard configuration

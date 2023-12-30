@@ -1,12 +1,11 @@
-import RouterConfig from './Router.jsx'
+import RouterConfig from './Router.jsx';
 
 function App() {
-
   return (
     <>
       <RouterConfig />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
