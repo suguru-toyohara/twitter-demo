@@ -3,6 +3,13 @@ import { ProgressCircle } from './Utils/ProgressCircle';
 import { useState } from 'react';
 import PropTypes from 'prop-types'; // Add this line
 import { Sleep } from './Utils/Utils';
+import styled from 'styled-components';
+
+const AbsolutePositionDiv = styled.div`
+  position: absolute;
+  left: 30%;
+`;
+
 
 export const TweetField = ({ inputFunc }) => {
   const [Tweet, SetTweet] = useState('');
@@ -23,15 +30,18 @@ export const TweetField = ({ inputFunc }) => {
               }}
               value={Tweet}
               disabled={isTweeting}
+              sx={{ fontSize: '20px' }}
             />
             <Grid container>
               <Grid item xs={7} />
               <Grid item xs={2} sx={{ marginTop: '4px', position: 'relative' }}>
+                <AbsolutePositionDiv>
                 {isTweeting ? (
                   <CircularProgress size={'30px'} />
                 ) : (
                   <ProgressCircle value={Math.floor((Tweet.length / 140) * 100)} size={'30px'} />
                 )}
+                </AbsolutePositionDiv>
               </Grid>
               <Grid item xs={3}>
                 <Button
