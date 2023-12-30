@@ -1,0 +1,30 @@
+* {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    color: black;
+    background-color: white;
+  }
+
+  h1 {
+    font-weight: 800;
+    font-size: 1.5rem;
+  }
+
+  #main-frame {
+    border: 1px solid black;
+    width: 500px;
+    position: absolute; /* 要素を画面に対して絶対位置で配置 */
+    left: 50%; /* 左端を画面の中央に */
+    transform: translate(
+      -50%,
+      0%
+    ); /* 要素自体を左上に50%ずつ移動して中央に配置 */
+  }
+
+  .bordered {
+    border: 1px solid red;
+  }
