@@ -1,11 +1,52 @@
-import { Avatar, Grid, Stack, Box, Typography } from '@mui/material';
+import { Avatar, Grid, Stack, Box, Typography, IconButton } from '@mui/material';
 import PropTypes from 'prop-types';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import RepeatIcon from '@mui/icons-material/Repeat';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import IosShareIcon from '@mui/icons-material/IosShare';
-const utilButtonStyle = { color: 'gray', fontSize: '18px' };
+import styled from '@emotion/styled';
+const utilButtonStyle = { color: 'gray', fontSize: '20px' };
+const StyledSpan = styled.span`
+  color: gray;
+  font-size: 16px;
+  vertical-align: -1px;
+`;
+
+const TweetUtilButton = ({ valiant, value, ...props }) => {
+  const valiant2Icon = (valiant) => {
+    switch (valiant) {
+      case 'reply':
+        return <ChatBubbleOutlineIcon sx={utilButtonStyle} />;
+      case 'retweet':
+        return <RepeatIcon sx={utilButtonStyle} />;
+      case 'fav':
+        return <FavoriteBorderIcon sx={utilButtonStyle} />;
+      case 'bookmark':
+        return <BookmarkBorderIcon sx={utilButtonStyle} />;
+      case 'share':
+        return <IosShareIcon sx={utilButtonStyle} />;
+      default:
+        return null;
+    }
+  };
+
+  const Icon = valiant2Icon(valiant);
+  return (
+    <>
+      <IconButton size="small" {...props}>
+        {Icon}
+      </IconButton>
+      <StyledSpan>{value}</StyledSpan>
+    </>
+  );
+};
+
+TweetUtilButton.propTypes = {
+  valiant: PropTypes.string.isRequired,
+  value: PropTypes.number,
+  onClick: PropTypes.func,
+};
 
 export const TweetCard = ({ user, userId, tweet }) => {
   return (
@@ -23,19 +64,19 @@ export const TweetCard = ({ user, userId, tweet }) => {
             <Typography sx={{ whiteSpace: 'pre-wrap' }}>{tweet}</Typography>
             <Grid container columns={9} sx={{ marginTop: '10px' }}>
               <Grid item xs={2}>
-                <ChatBubbleOutlineIcon sx={utilButtonStyle} />
+                <TweetUtilButton valiant="reply" value={1} />
               </Grid>
               <Grid item xs={2}>
-                <RepeatIcon sx={utilButtonStyle} />
+                <TweetUtilButton valiant="retweet" value={21} />
               </Grid>
               <Grid item xs={2}>
-                <FavoriteBorderIcon sx={utilButtonStyle} />
+                <TweetUtilButton valiant="fav" value={1} />
               </Grid>
               <Grid item xs={2}>
-                <BookmarkBorderIcon sx={utilButtonStyle} />
+                <TweetUtilButton valiant="bookmark" />
               </Grid>
               <Grid item xs={1}>
-                <IosShareIcon sx={utilButtonStyle} />
+                <TweetUtilButton valiant="share" />
               </Grid>
             </Grid>
           </Stack>
