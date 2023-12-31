@@ -11,8 +11,19 @@ const AbsolutePositionDiv = styled.div`
 `;
 
 export const TweetField = ({ inputFunc }) => {
+  // state hooks
   const [Tweet, SetTweet] = useState('');
   const [isTweeting, SetIsTweeting] = useState(false);
+
+  // ツイートをポストする関数
+  const PostTweet = async () => {
+    SetIsTweeting(true);
+    await Sleep(1000);
+    inputFunc({ user: 'Simeji', userId: '@Simeji1993', tweet: Tweet });
+    SetTweet('');
+    SetIsTweeting(false);
+  };
+
   return (
     <>
       <Grid container sx={{ padding: '10px' }}>
@@ -30,6 +41,12 @@ export const TweetField = ({ inputFunc }) => {
               value={Tweet}
               disabled={isTweeting}
               sx={{ fontSize: '20px' }}
+              onKeyDown={(e) => {
+                // Ctrl + Enterでポスト
+                if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+                  PostTweet();
+                }
+              }}
             />
             <Grid container>
               <Grid item xs={7} />
@@ -48,17 +65,7 @@ export const TweetField = ({ inputFunc }) => {
                   variant="contained"
                   disabled={Tweet === ''}
                   onClick={() => {
-                    const promise = Sleep(1000);
-                    SetIsTweeting(true);
-                    promise.then(() => {
-                      inputFunc({
-                        user: 'Simeji',
-                        userId: '@Simeji1993',
-                        tweet: Tweet,
-                      });
-                      SetTweet('');
-                      SetIsTweeting(false);
-                    });
+                    PostTweet();
                   }}
                 >
                   ポストする
