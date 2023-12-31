@@ -1,5 +1,11 @@
 import { Avatar, Grid, Stack, Box, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import RepeatIcon from '@mui/icons-material/Repeat';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import IosShareIcon from '@mui/icons-material/IosShare';
+const utilButtonStyle = { color: 'gray', fontSize: '18px' };
 
 export const TweetCard = ({ user, userId, tweet }) => {
   return (
@@ -15,6 +21,23 @@ export const TweetCard = ({ user, userId, tweet }) => {
               <span style={{ color: 'gray' }}>{userId}</span>
             </Box>
             <Typography sx={{ whiteSpace: 'pre-wrap' }}>{tweet}</Typography>
+            <Grid container columns={9} sx={{ marginTop: '10px' }}>
+              <Grid item xs={2}>
+                <ChatBubbleOutlineIcon sx={utilButtonStyle} />
+              </Grid>
+              <Grid item xs={2}>
+                <RepeatIcon sx={utilButtonStyle} />
+              </Grid>
+              <Grid item xs={2}>
+                <FavoriteBorderIcon sx={utilButtonStyle} />
+              </Grid>
+              <Grid item xs={2}>
+                <BookmarkBorderIcon sx={utilButtonStyle} />
+              </Grid>
+              <Grid item xs={1}>
+                <IosShareIcon sx={utilButtonStyle} />
+              </Grid>
+            </Grid>
           </Stack>
         </Grid>
       </Grid>
