@@ -38,7 +38,7 @@ const TweetUtilButton = ({ valiant, value, ...props }) => {
       case 'retweet':
         return '#00C06B';
       case 'fav':
-        return 'red';
+        return '#E0245E';
       case 'bookmark':
         return '#1DA1F2';
       case 'share':
