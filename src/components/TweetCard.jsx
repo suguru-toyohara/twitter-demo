@@ -6,38 +6,71 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import IosShareIcon from '@mui/icons-material/IosShare';
 import styled from '@emotion/styled';
-const utilButtonStyle = { color: 'gray', fontSize: '20px' };
+import { useState } from 'react';
+const utilButtonStyle = { fontSize: '20px' };
 const StyledSpan = styled.span`
-  color: gray;
   font-size: 16px;
   vertical-align: -1px;
 `;
 
 const TweetUtilButton = ({ valiant, value, ...props }) => {
+  const [isHover, SetIsHover] = useState(false);
   const valiant2Icon = (valiant) => {
     switch (valiant) {
       case 'reply':
-        return <ChatBubbleOutlineIcon sx={utilButtonStyle} />;
+        return ChatBubbleOutlineIcon;
       case 'retweet':
-        return <RepeatIcon sx={utilButtonStyle} />;
+        return RepeatIcon;
       case 'fav':
-        return <FavoriteBorderIcon sx={utilButtonStyle} />;
+        return FavoriteBorderIcon;
       case 'bookmark':
-        return <BookmarkBorderIcon sx={utilButtonStyle} />;
+        return BookmarkBorderIcon;
       case 'share':
-        return <IosShareIcon sx={utilButtonStyle} />;
+        return IosShareIcon;
       default:
         return null;
     }
   };
-
-  const Icon = valiant2Icon(valiant);
+  const valiant2Color = (valiant) => {
+    switch (valiant) {
+      case 'reply':
+        return '#1DA1F2';
+      case 'retweet':
+        return '#00C06B';
+      case 'fav':
+        return 'red';
+      case 'bookmark':
+        return '#1DA1F2';
+      case 'share':
+        return '#1DA1F2';
+      default:
+        return null;
+    }
+  };
+  const IconComponent = valiant2Icon(valiant);
   return (
     <>
-      <IconButton size="small" {...props}>
-        {Icon}
+      <IconButton
+        size="small"
+        onMouseEnter={() => {
+          SetIsHover(true);
+        }}
+        onMouseLeave={() => {
+          SetIsHover(false);
+        }}
+        {...props}
+      >
+        {
+          <IconComponent
+            sx={
+              isHover
+                ? { color: valiant2Color(valiant), ...utilButtonStyle }
+                : { color: 'gray', ...utilButtonStyle }
+            }
+          />
+        }
       </IconButton>
-      <StyledSpan>{value}</StyledSpan>
+      <StyledSpan style={isHover ? { color: valiant2Color(valiant) } : {}}>{value}</StyledSpan>
     </>
   );
 };
