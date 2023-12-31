@@ -1,24 +1,22 @@
-import { CircularProgress } from '@mui/material';
-import './main.css';
+import { Box, CircularProgress } from '@mui/material';
 import PropTypes from 'prop-types';
 
-export const ProgressCircle = ({size, value}) => {
+export const ProgressCircle = ({ size, value }) => {
   return (
-    <>
+    <Box sx={{ position: 'relative' }}>
       <CircularProgress
         variant="determinate"
-        sx={{ color: '#CCC' }}
+        sx={{ color: '#CCC', position: 'absolute' }}
         value={100}
         size={size}
-        className="items"
       />
       <CircularProgress
         variant="determinate"
         value={value}
         size={size}
-        className="items"
+        sx={{ color: 'primary.main', position: 'absolute' }}
       />
-    </>
+    </Box>
   );
 };
 
