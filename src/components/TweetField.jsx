@@ -1,4 +1,4 @@
-import { Stack, Grid, Avatar, InputBase, Button, CircularProgress } from '@mui/material';
+import { Stack, Grid, Avatar, Input, Button, CircularProgress } from '@mui/material';
 import { ProgressCircle } from './Utils/ProgressCircle';
 import { useState } from 'react';
 import PropTypes from 'prop-types'; // Add this line
@@ -32,7 +32,7 @@ export const TweetField = ({ inputFunc }) => {
         </Grid>
         <Grid item xs={11} sx={{ padding: '10px' }}>
           <Stack>
-            <InputBase
+            <Input
               placeholder="いまどうしてる？"
               multiline
               onChange={(e) => {
@@ -40,13 +40,21 @@ export const TweetField = ({ inputFunc }) => {
               }}
               value={Tweet}
               disabled={isTweeting}
+              error={Tweet.length > 140}
               sx={{ fontSize: '20px' }}
               onKeyDown={(e) => {
                 // Ctrl + Enterでポスト
-                if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+                if (
+                  e.key === 'Enter' &&
+                  (e.ctrlKey || e.metaKey) &&
+                  Tweet !== '' &&
+                  !isTweeting &&
+                  Tweet.length <= 140
+                ) {
                   PostTweet();
                 }
               }}
+              disableUnderline
             />
             <Grid container>
               <Grid item xs={7} />
@@ -63,7 +71,7 @@ export const TweetField = ({ inputFunc }) => {
                 <Button
                   sx={{ borderRadius: '20px' }}
                   variant="contained"
-                  disabled={Tweet === ''}
+                  disabled={Tweet === '' || isTweeting || Tweet.length > 140}
                   onClick={() => {
                     PostTweet();
                   }}
